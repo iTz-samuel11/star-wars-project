@@ -1,43 +1,28 @@
 const getState = ({ getStore, getActions, setStore }) => {
+	const API_URL = "https://rickandmortyapi.com/api"
 	return {
 		store: {
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			characters: []
+
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
-			},
-			loadSomeData: () => {
-				/**
-					fetch().then().then(data => setStore({ "foo": data.bar }))
-				*/
-			},
-			changeColor: (index, color) => {
-				//get the store
-				const store = getStore();
-
-				//we have to loop the entire demo array to look for the respective index
-				//and change its color
-				const demo = store.demo.map((elm, i) => {
-					if (i === index) elm.background = color;
-					return elm;
-				});
-
-				//reset the global store
-				setStore({ demo: demo });
-			}
+			getCharacters: async () => {
+				try{
+					const response = await fetch(
+						`${API_URL}/character`
+					);
+					const body = await response.json();
+					if (response.status !== 200) {
+						alert("no pudimos encontrar el personaje")
+						return;
+					}
+					setStore({
+						characters: body.results
+					});
+				} catch(error) {
+					alert("promesa rechazasa")
+				}
+		    }
 		}
 	};
 };
