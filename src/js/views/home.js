@@ -7,7 +7,7 @@ export const Home = () => {
 	const {store, actions} = useContext(Context);
 	return (
 		<div className="container">
-			<div className="d-flex flex-wrap w-100">
+			<div className="d-flex  w-100 scroll flex-nowrap">
 				{store.characters.map(
 					(characters, index) => {
 						return(

@@ -1,0 +1,7 @@
+/* .scroll::-webkit-scrollbar{
+    display: block;
+} */
+
+.scroll{
+    overflow: scroll;
+}
