@@ -10,7 +10,7 @@ export const Planets = ({item}) => {
             <div className="card-body">
                 <h5 className="card-title">{item.name}</h5>
                 <div>
-                    <Link href="#" className="btn btn-dark text-danger" style={{marginRight: "43%"}} to={`/single/${item.uid}`}>learn more</Link>
+                    <Link href="#" className="btn btn-dark text-danger" style={{marginRight: "43%"}} to={`/singlePlanet/planets/${item.uid}`}>learn more</Link>
                     <button className="btn btn-warning"><i className="fa-solid fa-heart"></i></button>
                 </div>
             </div>

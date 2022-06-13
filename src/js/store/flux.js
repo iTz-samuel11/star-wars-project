@@ -5,9 +5,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [],
 			planets:[],
 			vehicles:[],
-			singleCharacter: []
+			singleCharacter: [],
+			singlePlanet: [],
 		},
 		actions: {
+			getSinglePlanet: async (uid) => {
+				try{
+					const response = await fetch(
+						`${API_URL}/planets/${uid}`
+					);
+					const body = await response.json();
+					if (response.status !== 200) {
+						alert("no pudimos encontrar el planeta")
+						return;
+					}
+					setStore({
+						singlePlanet: {
+							...body.result.properties, 
+							uid: body.result.uid,
+							description: body.result.description,
+						}	
+					});
+				} catch(error) {
+					alert("promesa de planeta rechazasa")
+				}
+			},
 			getSingleCharacter: async (uid) => {
 				try{
 					const response = await fetch(

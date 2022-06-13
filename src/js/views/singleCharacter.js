@@ -32,7 +32,7 @@ export const SingleCharacter = props => {
 			</div>
 
 			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
+				<span className="btn btn-dark btn-lg text-danger" href="#" role="button">
 					Back home
 				</span>
 			</Link>
