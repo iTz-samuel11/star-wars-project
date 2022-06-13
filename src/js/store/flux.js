@@ -7,8 +7,30 @@ const getState = ({ getStore, getActions, setStore }) => {
 			vehicles:[],
 			singleCharacter: [],
 			singlePlanet: [],
+			singleVehicle: []
 		},
 		actions: {
+			getSingleVehicles: async (uid) => {
+				try{
+					const response = await fetch(
+						`${API_URL}/vehicles/${uid}`
+					);
+					const body = await response.json();
+					if (response.status !== 200) {
+						alert("no pudimos encontrar el vehiculo")
+						return;
+					}
+					setStore({
+						singleVehicle: {
+							...body.result.properties, 
+							uid: body.result.uid,
+							description: body.result.description,
+						}	
+					});
+				} catch(error) {
+					alert("promesa de vehiculo rechazasa")
+				}
+			},
 			getSinglePlanet: async (uid) => {
 				try{
 					const response = await fetch(
