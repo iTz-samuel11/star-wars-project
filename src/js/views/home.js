@@ -1,6 +1,8 @@
 import React, {useContext} from "react";
 import "../../styles/home.css";
-import { Card } from "../component/Card.js";
+import { Peoples } from "../component/Peoples.js";
+import { Planets } from "../component/Planets.js";
+import { Vehicles } from "../component/Vehicles.js";
 import { Context } from "../store/appContext";
 
 export const Home = () => {
@@ -11,7 +13,31 @@ export const Home = () => {
 				{store.characters.map(
 					(characters, index) => {
 						return(
-							<Card key={characters.id} item={characters} />
+							<div>
+								<Peoples key={characters.id} item={characters} />
+							</div>
+						)
+					}
+				)}
+			</div>
+			<div className="d-flex  w-100 scroll flex-nowrap">
+				{store.planets.map(
+					(planets, index) => {
+						return(
+							<div>
+								<Planets key={planets.id} item={planets} />
+							</div>
+						)
+					}
+				)}
+			</div>
+			<div className="d-flex  w-100 scroll flex-nowrap">
+				{store.vehicles.map(
+					(vehicles, index) => {
+						return(
+							<div>
+								<Vehicles key={vehicles.id} item={vehicles} />
+							</div>
 						)
 					}
 				)}

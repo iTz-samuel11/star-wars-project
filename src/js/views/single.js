@@ -3,24 +3,76 @@ import PropTypes from "prop-types";
 import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
 
-export const Single = props => {
-	const { store, actions } = useContext(Context);
-	const params = useParams();
-	return (
-		<div className="jumbotron">
-			<h1 className="display-4">This will show the demo element: {store.demo[params.theid].title}</h1>
+// export const Single = props => {
+// 	const { store, actions } = useContext(Context);
+// 	const params = useParams();
+// 	useEffect(()=> {
+// 		actions.getSingleItem(params.resource, params.uid)
+// 	}, [params.resource, params.uid])
+// 	return (
+// 		<div className="container">
+// 			<div className="row justify-content-center align-middle">
+// 				<div className="col-6 d-flex justify-content-center align-middle">
+// 					<img src={`https://starwars-visualguide.com/assets/img/${params.resource === "people" 
+// 						? "characters"
+// 						: params.resource}/${store.singleItem.uid}.jpg`}/>
+// 				</div>
+// 				<div className="col-6 d-flex flex-column justify-content-start align-middle">
+// 					<h2>{store.singleItem.name}</h2>
+// 					<p>{store.singleItem.description}</p>
+// 			<div className="row container mt-4 flex-column">
+// 				<div className="col-2 fs-4 d-flex justify-content-between w-100">
+// 					<p>Name:</p>
+// 					<p>{store.singleItem.name}</p>
+// 				</div>
+// 				<div className="col-2 fs-4 d-flex justify-content-between w-100">
+// 					{params.resource === "people" && <p>Birth Year:</p>}
+// 					{params.resource === "people" && <p>{store.singleItem.birth_year}</p>}
+// 					{params.resource === "planets" && <p>Climate:</p>}
+// 					{params.resource === "planets" && <p>{store.singleItem.climate}</p>}
+// 					{params.resource === "starships" && <p>Model:</p>}
+// 					{params.resource === "starships" && <p>{store.singleItem.model}</p>}
+// 				</div>
+// 				<div className="col-2 fs-4 d-flex justify-content-between w-100">
+// 					{params.resource === "people" && <p>Gender:</p>}
+// 					{params.resource === "people" && <p>{store.singleItem.gender}</p>}
+// 					{params.resource === "planets" && <p>Population:</p>}
+// 					{params.resource === "planets" && <p>{store.singleItem.population}</p>}
+// 					{params.resource === "starships" && <p>Length:</p>}
+// 					{params.resource === "starships" && <p>{store.singleItem.length}</p>}
+// 				</div>
+// 				<div className="col-2 fs-4 d-flex justify-content-between w-100">
+// 					{params.resource === "people" && <p>Height:</p>}
+// 					{params.resource === "people" && <p>{store.singleItem.height}</p>}
+// 					{params.resource === "planets" && <p>Orbital Period:</p>}
+// 					{params.resource === "planets" && <p>{store.singleItem.orbital_period}</p>}
+// 					{params.resource === "starships" && <p>Crew:</p>}
+// 					{params.resource === "starships" && <p>{store.singleItem.crew}</p>}
+// 				</div>
+// 				<div className="col-2 fs-4 d-flex justify-content-between w-100">
+// 					{params.resource === "people" && <p>Skin Color:</p>}
+// 					{params.resource === "people" && <p>{store.singleItem.skin_color}</p>}
+// 					{params.resource === "planets" && <p>Rotation Period:</p>}
+// 					{params.resource === "planets" && <p>{store.singleItem.rotation_period}</p>}
+// 					{params.resource === "starships" && <p>Passengers:</p>}
+// 					{params.resource === "starships" && <p>{store.singleItem.passengers}</p>}
+// 				</div>
+// 				<div className="col-2 fs-4 d-flex justify-content-between w-100">
+// 					{params.resource === "people" && <p>Eye Color:</p>}
+// 					{params.resource === "people" && <p>{store.singleItem.eye_color}</p>}
+// 					{params.resource === "planets" && <p>Diameter:</p>}
+// 					{params.resource === "planets" && <p>{store.singleItem.diameter}</p>}
+// 					{params.resource === "starships" && <p>Consumables:</p>}
+// 					{params.resource === "starships" && <p>{store.singleItem.consumables}</p>}
+// 				</div>	
+// 			</div>
+// 				</div>
+// 			</div>
+// 			{/* descripcion por resource */}
+// 		</div>
+// 	);
+// };
 
-			<hr className="my-4" />
-
-			<Link to="/">
-				<span className="btn btn-primary btn-lg" href="#" role="button">
-					Back home
-				</span>
-			</Link>
-		</div>
-	);
-};
-
-Single.propTypes = {
-	match: PropTypes.object
-};
+// Single.propTypes = {
+// 	match: PropTypes.object
+// };
