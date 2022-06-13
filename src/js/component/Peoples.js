@@ -11,7 +11,7 @@ export const Peoples = ({item}) => {
                     <div className="card-body">
                         <h5 className="card-title">{item.name}</h5>
                         <div>
-                            <a href="#" className="btn btn-dark text-danger" style={{marginRight: "43%"}}>learn more</a>
+                            <Link href="#" className="btn btn-dark text-danger" style={{marginRight: "43%"}} to={`/singleCharacter/people/${item.uid}`}>learn more</Link>
                             <button className="btn btn-warning"><i className="fa-solid fa-heart"></i></button>
                         </div>
                     </div>

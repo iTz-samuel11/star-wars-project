@@ -5,12 +5,13 @@ const getState = ({ getStore, getActions, setStore }) => {
 			characters: [],
 			planets:[],
 			vehicles:[],
+			singleCharacter: []
 		},
 		actions: {
-			getCharacters: async () => {
+			getSingleCharacter: async (uid) => {
 				try{
 					const response = await fetch(
-						`${API_URL}/people`
+						`${API_URL}/people/${uid}`
 					);
 					const body = await response.json();
 					if (response.status !== 200) {
@@ -18,10 +19,31 @@ const getState = ({ getStore, getActions, setStore }) => {
 						return;
 					}
 					setStore({
-						characters: body.results
+						singleCharacter: {
+							...body.result.properties, 
+							uid: body.result.uid,
+							description: body.result.description,
+						}	
 					});
 				} catch(error) {
 					alert("promesa de personaje rechazasa")
+				}
+			},
+			getCharacters: async () => {
+				try{
+					const response = await fetch(
+						`${API_URL}/people`
+					);
+					const body = await response.json();
+					if (response.status !== 200) {
+						alert("no pudimos encontrar los personajes")
+						return;
+					}
+					setStore({
+						characters: body.results
+					});
+				} catch(error) {
+					alert("promesa de personajes rechazasa")
 				}
 		    },
 			getPlanets: async () => {
