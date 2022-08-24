@@ -1,131 +1,90 @@
+const API_URL = "https://www.swapi.tech/api";
+
+
 const getState = ({ getStore, getActions, setStore }) => {
-	const API_URL ="https://www.swapi.tech/api"
 	return {
 		store: {
-			characters: [],
-			planets:[],
-			vehicles:[],
-			singleCharacter: [],
-			singlePlanet: [],
-			singleVehicle: []
+			people: [],
+			planets: [],
+			vehicles: [],
+			singleItem: {},
+			favorites: [],
+			heartButtom: "outline-",
+
 		},
+
 		actions: {
-			getSingleVehicles: async (uid) => {
-				try{
-					const response = await fetch(
-						`${API_URL}/vehicles/${uid}`
+			getItems: async (resource) => {
+				try { 
+					const response = await fetch (
+						`${API_URL}/${resource}`
 					);
 					const body = await response.json();
-					if (response.status !== 200) {
-						alert("no pudimos encontrar el vehiculo")
+					if (response.status!== 200) {
+						alert ("no pudimos cargar los personajes");
 						return;
 					}
-					setStore({
-						singleVehicle: {
-							...body.result.properties, 
-							uid: body.result.uid,
-							description: body.result.description,
-						}	
-					});
-				} catch(error) {
-					alert("promesa de vehiculo rechazasa")
+					setStore ({
+				[`${resource}`]: body.results
+					})
+				}	
+				catch (error) {
+					alert("no pudimos cargar los items")
+				};
+			},
+			getSingleItem: async (resource, uid) => {
+				try { 
+					const response = await fetch (
+						`${API_URL}/${resource}/${uid}`
+					);
+					const body = await response.json();
+					if (response.status!== 200) {
+						alert ("no pudimos cargar los planetas!");
+						return;
+					}
+					setStore ({
+					singleItem: {
+						...body.result.properties,
+						uid: body.result.uid,
+						description: body.result.description,
+					}	
+					})
+				} catch (error) {
+					alert ("no pudimos cargar los planetas")
+					console.log(error)
 				}
 			},
-			getSinglePlanet: async (uid) => {
-				try{
-					const response = await fetch(
-						`${API_URL}/planets/${uid}`
-					);
-					const body = await response.json();
-					if (response.status !== 200) {
-						alert("no pudimos encontrar el planeta")
-						return;
-					}
+			removeSingleItem: async (resource) => {
+				
+					setStore ({
+					    singleItem: ""
+					})
+				},	
+
+				addFavorites: (resource) => {
 					setStore({
-						singlePlanet: {
-							...body.result.properties, 
-							uid: body.result.uid,
-							description: body.result.description,
-						}	
-					});
-				} catch(error) {
-					alert("promesa de planeta rechazasa")
-				}
-			},
-			getSingleCharacter: async (uid) => {
-				try{
-					const response = await fetch(
-						`${API_URL}/people/${uid}`
-					);
-					const body = await response.json();
-					if (response.status !== 200) {
-						alert("no pudimos encontrar el personaje")
-						return;
-					}
+						favorites: [...getStore().favorites, resource]
+					})
+					getActions().holdHeartButton()
+
+				},
+				deleteFavorites: (resource) => {
 					setStore({
-						singleCharacter: {
-							...body.result.properties, 
-							uid: body.result.uid,
-							description: body.result.description,
-						}	
-					});
-				} catch(error) {
-					alert("promesa de personaje rechazasa")
-				}
-			},
-			getCharacters: async () => {
-				try{
-					const response = await fetch(
-						`${API_URL}/people`
-					);
-					const body = await response.json();
-					if (response.status !== 200) {
-						alert("no pudimos encontrar los personajes")
-						return;
+						favorites: [...getStore().favorites.filter((item,index)=>{
+							if (resource.name !== item.name) return true;
+						})]
+					})
+				},
+				holdHeartButtom: () => {
+					setStore ({
+						heartButton: "",
+
 					}
-					setStore({
-						characters: body.results
-					});
-				} catch(error) {
-					alert("promesa de personajes rechazasa")
+					)
 				}
-		    },
-			getPlanets: async () => {
-				try{
-					const response = await fetch(
-						`${API_URL}/planets`
-					);
-					const body = await response.json();
-					if (response.status !== 200) {
-						alert("no pudimos encontrar el planeta")
-						return;
-					}
-					setStore({
-						planets: body.results
-					});
-				} catch(error) {
-					alert("promesa de planeta rechazasa")
-				}
-		    },
-			getVehicles: async () => {
-				try{
-					const response = await fetch(
-						`${API_URL}/vehicles`
-					);
-					const body = await response.json();
-					if (response.status !== 200) {
-						alert("no pudimos encontrar el vehiculo")
-						return;
-					}
-					setStore({
-						vehicles: body.results
-					});
-				} catch(error) {
-					alert("promesa de vehiculo rechazada")
-				}
-			},
-		}
+			}			
 	};
 };
 
 export default getState;
+

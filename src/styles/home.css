@@ -2,6 +2,11 @@
     display: block;
 } */
 
-.scroll{
-    overflow: scroll;
+.scroll {
+    overflow-x: scroll;
+}
+
+.card {
+
+    border-radius: 2%;
 }
